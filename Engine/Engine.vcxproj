@@ -212,13 +212,10 @@ xcopy $(OutDir)\*.lib $(SolutionDir)\Lib\ /e /y</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Actor.h" />
-<<<<<<< HEAD
     <ClInclude Include="Actor\ActorCell.h" />
     <ClInclude Include="Actor\DrawableActor.h" />
     <ClInclude Include="Actor\Type.h" />
-=======
     <ClInclude Include="Actor\DrawableActor.h" />
->>>>>>> parent of b773401 (1-22/ ally attack 하는중 화면 안나옴)
     <ClInclude Include="Container\List.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Engine\Engine.h" />

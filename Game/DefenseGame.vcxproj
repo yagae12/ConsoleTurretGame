@@ -179,7 +179,6 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-<<<<<<< HEAD:Game/DefenseGame.vcxproj
     <ClCompile Include="Actor\Cell.cpp">
       <DeploymentContent>true</DeploymentContent>
     </ClCompile>
@@ -188,10 +187,8 @@
       <DeploymentContent>true</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Actor\EntityManager.cpp" />
-=======
     <ClCompile Include="Actor\Road.cpp" />
     <ClCompile Include="Actor\Place.cpp" />
->>>>>>> parent of b773401 (1-22/ ally attack 하는중 화면 안나옴):Game/Poketmon.vcxproj
     <ClCompile Include="Actor\Player.cpp" />
     <ClCompile Include="Ally\Ally.cpp">
       <DeploymentContent>true</DeploymentContent>
@@ -257,7 +254,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD:Game/DefenseGame.vcxproj
     <ClInclude Include="Actor\Ally.h" />
     <ClInclude Include="Actor\Archer.h" />
     <ClInclude Include="Actor\Cell.h">
@@ -270,11 +266,9 @@
     </ClInclude>
     <ClInclude Include="Actor\EntityManager.h" />
     <ClInclude Include="Actor\Goblin.h" />
-=======
     <ClInclude Include="Actor\Enemy.h" />
     <ClInclude Include="Actor\Road.h" />
     <ClInclude Include="Actor\Place.h" />
->>>>>>> parent of b773401 (1-22/ ally attack 하는중 화면 안나옴):Game/Poketmon.vcxproj
     <ClInclude Include="Actor\Player.h" />
     <ClInclude Include="Ally\Ally.h">
       <DeploymentContent>true</DeploymentContent>
@@ -310,7 +304,6 @@
       <DeploymentContent>true</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Game\Game.h" />
-<<<<<<< HEAD:Game/DefenseGame.vcxproj
     <ClInclude Include="Game\IdleState.h">
       <DeploymentContent>true</DeploymentContent>
     </ClInclude>
@@ -348,14 +341,12 @@
     <ClInclude Include="WaveManager.h">
       <DeploymentContent>true</DeploymentContent>
     </ClInclude>
-=======
     <ClInclude Include="Level\Cell.h" />
     <ClInclude Include="Level\Define.h" />
     <ClInclude Include="Level\GameLevel.h" />
     <ClInclude Include="Level\MapManager.h" />
     <ClInclude Include="Level\MenuLevel.h" />
     <ClInclude Include="Type.h" />
->>>>>>> parent of b773401 (1-22/ ally attack 하는중 화면 안나옴):Game/Poketmon.vcxproj
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
