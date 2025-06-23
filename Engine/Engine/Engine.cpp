@@ -11,14 +11,6 @@
 
 #include "Render/ScreenBuffer.h"
 
-// ÄÜ¼Ö Ã¢ ¸Ş½ÃÁö Äİ¹é ÇÔ¼ö.
-BOOL WINAPI MessageProcessor(DWORD message)
-{
-	switch (message)
-	{
-	case CTRL_CLOSE_EVENT:
-		Engine::Get().QuitGame();
-		return true;
 
 	default:
 		return false;
@@ -28,30 +20,30 @@ BOOL WINAPI MessageProcessor(DWORD message)
 <<<<<<< HEAD
 
 =======
->>>>>>> parent of b773401 (1-22/ ally attack í•˜ëŠ”ì¤‘ í™”ë©´ ì•ˆë‚˜ì˜´)
-// ½ºÅÂÆ½ º¯¼ö ÃÊ±âÈ­.
+>>>>>>> parent of b773401 (1-22/ ally attack é ƒæ©‚å§…æ¬·ï¿½ é ‡æ—Šâ” éå §å€¶é“ï¿½)
+// èƒ¶æ€•å¹³ å‡½è æª¬æ‰æ‹³.
 Engine* Engine::instance = nullptr;
 
 Engine::Engine()
 	: quit(false), mainLevel(nullptr), screenSize(31, 20)
 {
-	// ·£´ı ½Ãµå ¼³Á¤.
+	// ç½šå¾… çŸ«é› æ±²æ²¥.
 	srand((unsigned int)time(nullptr));
 
-	// ½Ì±ÛÅæ °´Ã¼ ¼³Á¤.
+	// æ•™è‡‚æ²› æŒ‰çœ‰ æ±²æ²¥.
 	instance = this;
 
-	// ±âº» Å¸°Ù ÇÁ·¹ÀÓ ¼Óµµ ¼³Á¤.
+	// æ‰å¤¯ é¸¥ç™¾ æ©‡é¥­çƒ™ åŠ æ¡£ æ±²æ²¥.
 	SetTargetFrameRate(60.0f);
 
-	// È­¸é ¹öÆÛ ÃÊ±âÈ­.
-	// 1. ¹öÆÛ Å©±â ÇÒ´ç.
+	// æ‹³æ æ»šæ¬º æª¬æ‰æ‹³.
+	// 1. æ»šæ¬º å†œæ‰ ä¸”å¯¸.
 	imageBuffer = new CHAR_INFO[(screenSize.x + 1) * screenSize.y + 1];
 
-	// ¹öÆÛ ÃÊ±âÈ­.
+	// æ»šæ¬º æª¬æ‰æ‹³.
 	ClearImageBuffer();
 
-	// µÎ °³ÀÇ ¹öÆÛ »ı¼º (¹öÆÛ¸¦ ¹ø°¥¾Æ »ç¿ëÇÏ±â À§ÇØ-´õºí ¹öÆÛ¸µ).
+	// æ»´ ä¿ºç‹¼ æ»šæ¬º ç§¯å·± (æ»šæ¬ºç”« é”…å“é…’ è¤ä¾©çªæ‰ å›°ç§¦-æ­¹å–‰ æ»šæ¬ºå‚…).
 	COORD size = { (short)screenSize.x, (short)screenSize.y };
 	renderTargets[0] = new ScreenBuffer(GetStdHandle(STD_OUTPUT_HANDLE), size);
 	renderTargets[1] = new ScreenBuffer(size);
@@ -59,110 +51,110 @@ Engine::Engine()
 	
 
 
-	// ½º¿Ò ¹öÆÛ.
+	// èƒ¶æ³ æ»šæ¬º.
 	Present();
 
-	// ÄÜ¼Ö Ã¢ ÀÌº¥Æ® Äİ¹é ÇÔ¼ö µî·Ï.
+	// èƒ½è´¾ èŠ’ æäº¥é£˜ å¦®å½’ çªƒè æ®¿åºŸ.
 	SetConsoleCtrlHandler(MessageProcessor, true);
-	//ÄÜ¼Ö»çÀÌÁî/ ÆùÆ® Á¹·ù ±½±â Å©±âµî °áÁ¤ ÇÔ¼ö
+	//èƒ½è´¾è¤æä»¤/ è¿„é£˜ å‡‰å¹… è‹¯æ‰ å†œæ‰æ®¿ æ¬æ²¥ çªƒè
 	SetupConsole();
 
 <<<<<<< HEAD
 
 =======
->>>>>>> parent of b773401 (1-22/ ally attack í•˜ëŠ”ì¤‘ í™”ë©´ ì•ˆë‚˜ì˜´)
+>>>>>>> parent of b773401 (1-22/ ally attack é ƒæ©‚å§…æ¬·ï¿½ é ‡æ—Šâ” éå §å€¶é“ï¿½)
 }
 
 Engine::~Engine()
 {
-	// ¸ŞÀÎ ·¹º§ ¸Ş¸ğ¸® ÇØÁ¦.
+	// çš‹ç‰¢ é¥­éª‡ çš‹è‘›åºœ ç§¦åŠ›.
 	if (mainLevel != nullptr)
 	{
 		delete mainLevel;
 	}
 
-	// Å¬¸®¾î ¹öÆÛ »èÁ¦.
+	// åŠªåºœç»¢ æ»šæ¬º æ˜åŠ›.
 	delete[] imageBuffer;
 
-	// È­¸é ¹öÆÛ »èÁ¦.
+	// æ‹³æ æ»šæ¬º æ˜åŠ›.
 	delete renderTargets[0];
 	delete renderTargets[1];
 }
 
 void Engine::Run()
 {
-	// ½ÃÀÛ Å¸ÀÓ ½ºÅÆÇÁ ÀúÀå.
-	// timeGetTime ÇÔ¼ö´Â ¹Ğ¸®¼¼ÄÁµå(1/1000ÃÊ) ´ÜÀ§.
+	// çŸ«ç´¯ é¸¥çƒ™ èƒ¶ç‰Œæ©‡ å†å˜.
+	// timeGetTime çªƒèç»° å‰åºœæŠ€ç‰§é›(1/1000æª¬) çªœå›°.
 	//unsigned long currentTime = timeGetTime();
 	//unsigned long previousTime = 0;
 
-	// CPU ½Ã°è »ç¿ë.
-	// ½Ã½ºÅÛ ½Ã°è -> °íÇØ»óµµ Ä«¿îÅÍ. (10000000).
-	// ¸ŞÀÎº¸µå¿¡ ½Ã°è°¡ ÀÖÀ½.
+	// CPU çŸ«æ‹Œ è¤ä¾©.
+	// çŸ«èƒ¶è¢ çŸ«æ‹Œ -> ç»Šç§¦æƒ‘æ¡£ å¢¨æ¬¾ç£. (10000000).
+	// çš‹ç‰¢ç„Šé›ä¿Š çŸ«æ‹Œå•Š ä¹æ¾œ.
 	LARGE_INTEGER frequency;
 	QueryPerformanceFrequency(&frequency);
 
 	//std::cout << "Frequency: " << frequency.QuadPart << "\n";
 
-	// ½ÃÀÛ ½Ã°£ ¹× ÀÌÀü ½Ã°£À» À§ÇÑ º¯¼ö.
+	// çŸ«ç´¯ çŸ«åŸƒ æ£º æå‚ˆ çŸ«åŸƒé˜‘ å›°èŒ„ å‡½è.
 	LARGE_INTEGER time;
 	QueryPerformanceCounter(&time);
 
 	int64_t currentTime = time.QuadPart;
 	int64_t previousTime = currentTime;
 
-	// ÇÁ·¹ÀÓ Á¦ÇÑ.
+	// æ©‡é¥­çƒ™ åŠ›èŒ„.
 	//float targetFrameRate = 90.0f;
 
-	// ÇÑ ÇÁ·¹ÀÓ ½Ã°£ °è»ê.
+	// èŒ„ æ©‡é¥­çƒ™ çŸ«åŸƒ æ‹Œé­‚.
 	//float targetOneFrameTime = 1.0f / targetFrameRate;
 
 	// Game-Loop.
 	while (true)
 	{
-		// Á¾·á Á¶°Ç.
+		// è¾†ä¸° ç‚¼æ‰’.
 		if (quit)
 		{
 			break;
 		}
 
-		// ÇöÀç ÇÁ·¹ÀÓ ½Ã°£ ÀúÀå.
+		// æ³…çŠ æ©‡é¥­çƒ™ çŸ«åŸƒ å†å˜.
 		//time = timeGetTime();
 		QueryPerformanceCounter(&time);
 		currentTime = time.QuadPart;
 
-		// ÇÁ·¹ÀÓ ½Ã°£ °è»ê.
+		// æ©‡é¥­çƒ™ çŸ«åŸƒ æ‹Œé­‚.
 		float deltaTime = static_cast<float>(currentTime - previousTime) /
 			static_cast<float>(frequency.QuadPart);
 
 
-		// ÇÁ·¹ÀÓ È®ÀÎ.
+		// æ©‡é¥­çƒ™ çŠ¬ç‰¢.
 		if (deltaTime >= targetOneFrameTime)
 		{
-			// ÀÔ·Â Ã³¸® (ÇöÀç Å°ÀÇ ´­¸² »óÅÂ È®ÀÎ).
+			// æ¶ä»¿ è´¸åºœ (æ³…çŠ è™ç‹¼ å–˜è¦† æƒ‘æ€• çŠ¬ç‰¢).
 			ProcessInput();
 
-			// ¾÷µ¥ÀÌÆ® °¡´ÉÇÑ »óÅÂ¿¡¼­¸¸ ÇÁ·¹ÀÓ ¾÷µ¥ÀÌÆ® Ã³¸®.
+			// è¯€å•æé£˜ å•Šç“·èŒ„ æƒ‘æ€•ä¿Šè¾‘çˆ¶ æ©‡é¥­çƒ™ è¯€å•æé£˜ è´¸åºœ.
 			if (shouldUpdate)
 			{
 				Update(deltaTime);
 				Draw();
 			}
 
-			// Å° »óÅÂ ÀúÀå.
+			// è™ æƒ‘æ€• å†å˜.
 			SavePreviouseKeyStates();
 
-			// ÀÌÀü ÇÁ·¹ÀÓ ½Ã°£ ÀúÀå.
+			// æå‚ˆ æ©‡é¥­çƒ™ çŸ«åŸƒ å†å˜.
 			previousTime = currentTime;
 
-			// ¾×ÅÍ Á¤¸® (»èÁ¦ ¿äÃ»µÈ ¾×ÅÍµé Á¤¸®).
+			// å’€ç£ æ²¥åºœ (æ˜åŠ› å¤¸æ²¡ç­‰ å’€ç£ç”¸ æ²¥åºœ).
 			if (mainLevel)
 			{
 				//mainLevel->DestroyActor();
 				mainLevel->ProcessAddedAndDestroyedActor();
 			}
 
-			// ÇÁ·¹ÀÓ È°¼ºÈ­.
+			// æ©‡é¥­çƒ™ åŠå·±æ‹³.
 			shouldUpdate = true;
 		}
 	}
@@ -170,34 +162,34 @@ void Engine::Run()
 
 void Engine::LoadLevel(Level* newLevel)
 {
-	// ±âÁ¸ ·¹º§ÀÌ ÀÖ´Ù¸é »èÁ¦ ÈÄ ±³Ã¼.
+	// æ‰ç²® é¥­éª‡æ ä¹ä¿ƒæ æ˜åŠ› é¥¶ èƒŒçœ‰.
 
-	// ¸ŞÀÎ ·¹º§ ¼³Á¤.
+	// çš‹ç‰¢ é¥­éª‡ æ±²æ²¥.
 	mainLevel = newLevel;
 }
 
 void Engine::AddActor(Actor* newActor)
 {
-	// ¿¹¿Ü Ã³¸®.
+	// æŠ—å¯‡ è´¸åºœ.
 	if (mainLevel == nullptr)
 	{
 		return;
 	}
 
-	// ·¹º§¿¡ ¾×ÅÍ Ãß°¡.
+	// é¥­éª‡ä¿Š å’€ç£ çœ å•Š.
 	shouldUpdate = false;
 	mainLevel->AddActor(newActor);
 }
 
 void Engine::DestroyActor(Actor* targetActor)
 {
-	// ¿¹¿Ü Ã³¸®.
+	// æŠ—å¯‡ è´¸åºœ.
 	if (mainLevel == nullptr)
 	{
 		return;
 	}
 
-	// ·¹º§¿¡ ¾×ÅÍ Ãß°¡.
+	// é¥­éª‡ä¿Š å’€ç£ çœ å•Š.
 	shouldUpdate = false;
 	targetActor->Destroy();
 }
@@ -223,31 +215,27 @@ void Engine::Draw(const Vector2& position, const char* image, Color color)
 {
 	int index = (position.y * (screenSize.x)) + position.x;
 	if (index < 0 || index >= (screenSize.x + 1) * screenSize.y) {
-		// ¹üÀ§¸¦ ÃÊ°úÇÏ¸é ±×¸®Áö ¾ÊÀ½
-		return;
-	}
-	for (int ix = 0; ix < (int)strlen(image); ++ix) {
 		int index = (position.y * (screenSize.x)) + position.x + ix;
 		imageBuffer[index].Char.AsciiChar = image[ix];
 <<<<<<< HEAD
 		imageBuffer[index].Attributes = (unsigned int)color;
 =======
 		imageBuffer[index].Attributes = (unsigned long)color;
->>>>>>> parent of b773401 (1-22/ ally attack í•˜ëŠ”ì¤‘ í™”ë©´ ì•ˆë‚˜ì˜´)
+>>>>>>> parent of b773401 (1-22/ ally attack é ƒæ©‚å§…æ¬·ï¿½ é ‡æ—Šâ” éå §å€¶é“ï¿½)
 	}
 }
 
 // void Engine::Draw(const Vector2& position, const char* image, Color foreground, Color background)
 // {
-// 	// ¹®ÀÚ¿­ ±æÀÌ
+// 	// å·©ç£Šå‡¯ è¾¨æ
 // 	size_t len = strlen(image);
 // 
 // 	for (size_t ix = 0; ix < len; ++ix)
 // 	{
 // 		int index = (position.y * screenSize.x) + position.x + ix;
-// 		// ¹®ÀÚ
+// 		// å·©ç£Š
 // 		imageBuffer[index].Char.AsciiChar = image[ix];
-// 		// Àü°æ»ö + ¹è°æ»öÀ» ÇÕÃÄ¼­ ¼Ó¼ºÀ¸·Î ¼³Á¤
+// 		// å‚ˆç‰ˆç¥¸ + ç¡…ç‰ˆç¥¸é˜‘ é’¦åªšè¾‘ åŠ å·±æ è‚º æ±²æ²¥
 // 		unsigned short attr = (unsigned short)foreground | (unsigned short)background;
 // 		imageBuffer[index].Attributes = attr;
 // 	}
@@ -276,40 +264,36 @@ bool Engine::GetKeyUp(int key)
 
 void Engine::QuitGame()
 {
-	// Á¾·á ÇÃ·¡±× ¼³Á¤.
-	quit = true;
-}
 
-Engine& Engine::Get()
 {
-	// ½Ì±ÛÅæ °´Ã¼ ¹İÈ¯.
+	// æ•™è‡‚æ²› æŒ‰çœ‰ é¦†åˆ¸.
 	return *instance;
 }
 
 void Engine::SetupConsole()
 {
-	// 1) ÄÜ¼ÖÀÇ ¿­(cols), Çà(lines) Å©°Ô Àâ±â
-	   //    ¿¹: °¡·Î 160, ¼¼·Î 50 (¸ÊÀÌ ´õ Å« °æ¿ì ÀûÀıÈ÷ ´Ã¸®¼¼¿ä)
+	// 1) èƒ½è´¾ç‹¼ å‡¯(cols), é’(lines) å†œéœ¸ æ£±æ‰
+	   //    æŠ—: å•Šè‚º 160, æŠ€è‚º 50 (ç”˜æ æ­¹ å¥´ ç‰ˆå¿« åˆ©ä¾‹æ´’ ç–µåºœæŠ€å¤¸)
 <<<<<<< HEAD
 	system("mode con cols=160 lines=50");
 =======
 	system("mode con cols=40 lines=40");
->>>>>>> parent of b773401 (1-22/ ally attack í•˜ëŠ”ì¤‘ í™”ë©´ ì•ˆë‚˜ì˜´)
+>>>>>>> parent of b773401 (1-22/ ally attack é ƒæ©‚å§…æ¬·ï¿½ é ‡æ—Šâ” éå §å€¶é“ï¿½)
 
-	// 2) ÄÜ¼Ö ÆùÆ® Å©±â ÁÙÀÌ±â(ÇÈ¼¿ ´ÜÀ§)
+	// 2) èƒ½è´¾ è¿„é£˜ å†œæ‰ ä¸´ææ‰(ä¾¨ä¼ çªœå›°)
 	CONSOLE_FONT_INFOEX cfi;
 	cfi.cbSize = sizeof(cfi);
 	cfi.nFont = 0;
-	cfi.dwFontSize.X = 8;  // ±ÛÀÚ Æø (ÇÈ¼¿)
-	cfi.dwFontSize.Y = 8;  // ±ÛÀÚ ³ôÀÌ (ÇÈ¼¿)
+	cfi.dwFontSize.X = 8;  // è‡‚ç£Š æ°” (ä¾¨ä¼)
+	cfi.dwFontSize.Y = 8;  // è‡‚ç£Š è‡­æ (ä¾¨ä¼)
 	cfi.FontFamily = FF_DONTCARE;
 	cfi.FontWeight = FW_NORMAL;
-	// ÆùÆ® ÀÌ¸§, ¿¹: "Consolas", "ÇÑ±Û ¸ŞÀÌÇÃ½ºÅä¸®" µî
+	// è¿„é£˜ ææŠš, æŠ—: "Consolas", "èŒ„è‡‚ çš‹ææ•²èƒ¶é…åºœ" æ®¿
 	wcscpy_s(cfi.FaceName, L"Consolas");
 	SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
 
-	// 3) ÄÜ¼Ö Ã¢ ÃÖ´ëÈ­ (È¤Àº ¿øÇÏ´Â Å©±â·Î ÀÌµ¿)
-	//    - ±×³É È­¸é °¡µæ Ã¤¿ì·Á¸é SW_MAXIMIZE
+	// 3) èƒ½è´¾ èŠ’ å¼¥æªæ‹³ (è¶£ç¯® ç›”çªç»° å†œæ‰è‚º ææ‚¼)
+	//    - å¼Šæˆ æ‹³æ å•Šå« ç›²å¿«å¦¨æ SW_MAXIMIZE
 // 	HWND hWnd = GetConsoleWindow();
 // 	ShowWindow(hWnd, SW_MAXIMIZE);
 }
@@ -347,14 +331,12 @@ BOOL Engine::gotoxy(int x, int y)
 
 BOOL Engine::gotoxy(const Vector2& pos)
 {
-	// ¸í½ÃÀû Çü º¯È¯À¸·Î µ¥ÀÌÅÍ ¼Õ½Ç °æ°í ÇØ°á
-	COORD cursor = { pos.x,pos.y };
 	return SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
 }
 
 void Engine::setColor(int txtColor, int bgColor)
 {
-	// ÄÜ¼Ö »ö»ó ¼³Á¤
+	// èƒ½è´¾ ç¥¸æƒ‘ æ±²æ²¥
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (bgColor << 4) | txtColor);
 }
 
@@ -367,7 +349,7 @@ void Engine::SetMap(Cell** mapData, int width, int height)
 
 
 =======
->>>>>>> parent of b773401 (1-22/ ally attack í•˜ëŠ”ì¤‘ í™”ë©´ ì•ˆë‚˜ì˜´)
+>>>>>>> parent of b773401 (1-22/ ally attack é ƒæ©‚å§…æ¬·ï¿½ é ‡æ—Šâ” éå §å€¶é“ï¿½)
 void Engine::ProcessInput()
 {
 	for (int ix = 0; ix < 255; ++ix)
@@ -378,7 +360,7 @@ void Engine::ProcessInput()
 
 void Engine::Update(float deltaTime)
 {
-	// ·¹º§ ¾÷µ¥ÀÌÆ®.
+	// é¥­éª‡ è¯€å•æé£˜.
 	if (mainLevel != nullptr)
 	{
 		mainLevel->Update(deltaTime);
@@ -393,12 +375,12 @@ void Engine::Clear()
 
 void Engine::Draw()
 {
-	Clear();  // È­¸é ÃÊ±âÈ­
+	Clear();  // æ‹³æ æª¬æ‰æ‹³
 	if (mainLevel != nullptr)
 	{
-		mainLevel->Draw();  // ÇöÀç ·¹º§ÀÇ ¸ğµç °´Ã¼¸¦ ±×¸³´Ï´Ù.
+		mainLevel->Draw();  // æ³…çŠ é¥­éª‡ç‹¼ è‘›ç”µ æŒ‰çœ‰ç”« å¼Šèµ‹èªä¿ƒ.
 	}
-	Present();  // ¹öÆÛ ±³È¯
+	Present();  // æ»šæ¬º èƒŒåˆ¸
 }
 
 void Engine::Present()
@@ -430,13 +412,13 @@ Vector2 Engine::getMousePos()
 	HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
 	if (!GetCurrentConsoleFont(hConsoleOutput, FALSE, &fontInfo)) {
 // 		std::cerr << "Error: Failed to get current console font info." << std::endl;
-		return Vector2(-1, -1); // ¿¹¿Ü »óÅÂ¸¦ ³ªÅ¸³»´Â °ª ¹İÈ¯
+		return Vector2(-1, -1); // æŠ—å¯‡ æƒ‘æ€•ç”« å”±é¸¥éƒ´ç»° è”¼ é¦†åˆ¸
 	}
 
 	COORD fontSize = GetConsoleFontSize(hConsoleOutput, fontInfo.nFont);
 	if (fontSize.X <= 0 || fontSize.Y <= 0) {
 // 		std::cerr << "Error: GetConsoleFontSize failed or returned invalid values." << std::endl;
-		return Vector2(-1, -1); // ¿¹¿Ü »óÅÂ¸¦ ³ªÅ¸³»´Â °ª ¹İÈ¯
+		return Vector2(-1, -1); // æŠ—å¯‡ æƒ‘æ€•ç”« å”±é¸¥éƒ´ç»° è”¼ é¦†åˆ¸
 	}
 
 	POINT p;
@@ -455,7 +437,7 @@ void Engine::setCursorVisible(bool vis, DWORD size)
 {
 	CONSOLE_CURSOR_INFO curInfo;
 	curInfo.bVisible = vis; // true : On, false : Off
-	curInfo.dwSize = size; // Ä¿¼­ ±½±â (1~100)
+	curInfo.dwSize = size; // ç›®è¾‘ è‹¯æ‰ (1~100)
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &curInfo);
 }
 void Engine::lockResize()
@@ -512,10 +494,10 @@ bool  Engine::getMouseInput()
 
 void Engine::ClearImageBuffer()
 {
-	// ¹öÆÛ µ¤¾î¾²±â.
+	// æ»šæ¬º ä¸¹ç»¢é™æ‰.
 	for (int y = 0; y < screenSize.y; ++y)
 	{
-		// ¹öÆÛ µ¤¾î¾²±â.
+		// æ»šæ¬º ä¸¹ç»¢é™æ‰.
 		for (int x = 0; x < screenSize.x + 1; ++x)
 		{
 			auto& buffer = imageBuffer[(y * (screenSize.x + 1)) + x];
@@ -523,13 +505,13 @@ void Engine::ClearImageBuffer()
 			buffer.Attributes = 0;
 		}
 
-		// °¢ ÁÙ ³¡¿¡ °³Çà ¹®ÀÚ Ãß°¡.
+		// é˜¿ ä¸´ åœºä¿Š ä¿ºé’ å·©ç£Š çœ å•Š.
 		auto& buffer = imageBuffer[(y * (screenSize.x + 1)) + screenSize.x];
 		buffer.Char.AsciiChar = '\n';
 		buffer.Attributes = 0;
 	}
 
-	// ¸¶Áö¸·¿¡ ³Î ¹®ÀÚ Ãß°¡.
+	// ä»˜ç˜¤é˜œä¿Š æ¾„ å·©ç£Š çœ å•Š.
 	auto& buffer = imageBuffer[(screenSize.x + 1) * screenSize.y];
 	buffer.Char.AsciiChar = '\0';
 	buffer.Attributes = 0;

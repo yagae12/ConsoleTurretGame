@@ -77,14 +77,11 @@
     <ClInclude Include="Render\ScreenBuffer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="Actor\ActorCell.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Actor\Type.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-=======
->>>>>>> parent of b773401 (1-22/ ally attack 하는중 화면 안나옴)
   </ItemGroup>
 </Project>

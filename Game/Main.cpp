@@ -5,17 +5,14 @@
 
 int main()
 {
-<<<<<<< HEAD
-	Game game ;
-=======
-	// ¸Þ¸ð¸® ´©¼ö È®ÀÎ.
-	CheckMemoryLeak();
->>>>>>> parent of b773401 (1-22/ ally attack í•˜ëŠ”ì¤‘ í™”ë©´ ì•ˆë‚˜ì˜´)
+        CheckMemoryLeak();
+        Game game;
 
-	game.init();
-	while (true)
-	{
-		game.update();
-		game.Draw();
-	}
+        game.init();
+        while (true)
+        {
+                game.update();
+                game.Draw();
+        }
 }
+
